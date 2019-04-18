@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. -->
+	<project basedir="." default="build" name="fangkuaiA3">
+    <property environment="env"/>
+    <property name="ECLIPSE_HOME" value="../../../../java/eclipse-committers-2018-09-win32-x86_64/eclipse/"/>
+    <property name="src" value="src/"/>
+    <property name="fangkuai_jar" value="fangkuai.jar/"/>
+    
+    <target name="init">
+    	<mkdir dir="${dest}"/>
+    </target>
+    <target name="compile" depends="init">
+        <javac srcdir="${src}" destdir="${dest}" includeantruntime="on"/>
+    </target>
+    <target name="build" depends="compile">
+        <jar jarfile="${fangkuai_jar}" basedir="${dest}"/>
+    </target>
+        <target name="run" depends="build">
+    <java classname="com.Start" classpath="${fangkuai_jar}"/>
+        </target>
+    <target name="clean">
+        <delete dir="${dest}"/>
+    	<delete file="${fangkuai_jar}"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="fangkuaiA3.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="Start">
+        <java classname="com.Start" failonerror="true" fork="yes">
+            <classpath refid="fangkuaiA3.classpath"/>
+        </java>
+    </target>
+</project>
